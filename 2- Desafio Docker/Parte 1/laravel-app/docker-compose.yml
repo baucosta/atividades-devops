@@ -1,0 +1,63 @@
+version: '3'
+
+services: 
+    laravel-app:
+        build: .
+        container_name: laravel-app
+        entrypoint: dockerize -template ./.docker/dockerize-templates/.env:.env -template ./.docker/dockerize-templates/nginx.conf:./.docker/nginx/nginx.conf -wait tcp://laravel-db:3306 -timeout 20s ./.docker/entrypoint.sh
+        environment: 
+            - DB_HOST=laravel-db
+            - DB_DATABASE=laravelapp
+            - DB_USERNAME=root
+            - DB_PASSWORD=123
+            - DB_PORT=3306
+            - NGINX_APP=laravel-app
+            - NGINX_PORT=9000
+        volumes:
+            - .:/var/www
+        depends_on: 
+            - laravel-db
+            - laravel-redis
+        networks: 
+            - laravel-network
+    
+    laravel-nginx:
+        build: .docker/nginx
+        container_name: laravel-nginx
+        tty: true
+        ports: 
+            - "8000:80"            
+        volumes: 
+            - .:/var/www
+        depends_on: 
+            - laravel-app
+        networks: 
+            - laravel-network
+    
+    laravel-db:
+        image: mysql:5.7
+        command: --innodb-use-native-aio=0
+        container_name: laravel-db
+        tty: true
+        ports: 
+            - "3307:3306"
+        volumes: 
+            - .docker/mysql_data:/var/lib/mysql
+        environment: 
+            - MYSQL_DATABASE=laravelapp
+            - MYSQL_ROOT_PASSWORD=123
+            - MYSQL_USER=root
+        networks: 
+            - laravel-network
+    
+    laravel-redis:
+        image: redis:alpine
+        container_name: laravel-redis
+        ports:
+            - "6379:6379"
+        networks: 
+            - laravel-network
+
+networks: 
+    laravel-network:
+        driver: bridge
