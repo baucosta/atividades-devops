@@ -2,3 +2,23 @@ steps:
     - id: "Performing docker-compose"
       name: 'docker/compose'
       args: ["-f", "./3_Processo_de_CI/laravel-app/docker-compose-ci.yml", "up", "-d"]
+
+    - id: "Performing composer"
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "composer", "install"]
+
+    - id: "Copying .env"
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "cp", ".env.example", ".env"]
+
+    - id: "Performing key:generate"
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "php", "/var/www/artisan", "key:generate"]
+
+    - id: "Performing migrations"
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "php", "/var/www/artisan", "migrate"]
+
+    - id: "Performing PHPUnit"
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "php", "/var/www/vendor/bin/phpunit", "-c","/var/www/phpunit.xml"]
