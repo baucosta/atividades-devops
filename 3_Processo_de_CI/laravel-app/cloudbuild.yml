@@ -3,6 +3,10 @@ steps:
       name: 'docker/compose'
       args: ["-f", "./3_Processo_de_CI/laravel-app/docker-compose-ci.yml", "up", "-d"]
 
+    - id: "Chown in /var/www"
+      name: 'docker'
+      args: ['exec','-u','root','-t','app','chown','-R','www-data:www-data','/var/www']
+
     - id: "Performing composer"
       name: 'docker'
       args: ["exec", "-t", "laravel-app", "composer", "install"]
