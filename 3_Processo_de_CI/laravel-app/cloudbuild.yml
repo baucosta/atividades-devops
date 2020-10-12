@@ -1,0 +1,4 @@
+steps:
+    - id: "Performing docker-compose"
+      name: 'docker/compose'
+      args: ["-f", "./3_Processo_de_CI/laravel-app/docker-compose-ci.yml", "up", "-d"]

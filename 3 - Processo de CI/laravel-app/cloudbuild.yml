@@ -1,5 +1,0 @@
-steps:
-    - id: "Performing docker-compose"
-      name: 'docker/compose'
-    #   args: ["-f", "docker-compose-ci.yml", "up", "-d"]
-      args: ["ls"]
