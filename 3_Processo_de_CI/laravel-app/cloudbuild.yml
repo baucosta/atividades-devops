@@ -7,14 +7,6 @@ steps:
       name: 'docker'
       args: ['exec','-u','root','-t','laravel-app','chown','-R','www-data:www-data','/var/www']
 
-    - id: "Performing ls"
-      name: 'docker'
-      args: ["exec", "-t", "laravel-app", "ls", "-la"]
-
-    - id: "Performing ls in docker"
-      name: 'docker'
-      args: ["exec", "-t", "laravel-app", "ls", "-la", ".docker"]
-
     # - id: "Performing composer "
     #   name: 'docker'
     #   args: ["exec", "-t", "laravel-app", "composer", "install"]
@@ -23,9 +15,17 @@ steps:
       name: 'docker'
       args: ["exec", "-t", "laravel-app", "cp", ".env.example", ".env"]
 
-    - id: "Performing key:generate"
+    - id: "Performing ls"
       name: 'docker'
-      args: ["exec", "-t", "laravel-app", "php", "/var/www/artisan", "key:generate"]
+      args: ["exec", "-t", "laravel-app", "ls", "-la"]
+
+    - id: "Performing ls in docker"
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "ls", "-la", ".docker"]
+
+    # - id: "Performing key:generate"
+    #   name: 'docker'
+    #   args: ["exec", "-t", "laravel-app", "php", "/var/www/artisan", "key:generate"]
 
     # - id: "Performing migrations"
     #   name: 'docker'
