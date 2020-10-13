@@ -11,6 +11,10 @@ steps:
       name: 'docker'
       args: ["exec", "-t", "laravel-app", "ls", "-la"]
 
+    - id: "Performing ls in docker"
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "ls", "-la", ".docker"]
+
     # - id: "Performing composer "
     #   name: 'docker'
     #   args: ["exec", "-t", "laravel-app", "composer", "install"]
