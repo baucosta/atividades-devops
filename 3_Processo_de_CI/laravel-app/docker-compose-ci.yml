@@ -18,6 +18,8 @@ services:
         depends_on: 
             - laravel-db
             - laravel-redis
+        links:
+            - laravel-db
         networks: 
             - laravel-network
     
