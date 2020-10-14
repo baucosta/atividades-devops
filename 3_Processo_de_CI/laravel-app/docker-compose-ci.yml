@@ -5,21 +5,19 @@ services:
         build: .
         container_name: laravel-app
         # entrypoint: dockerize -template ./.docker/dockerize-templates/.env:.env -template ./.docker/dockerize-templates/nginx.conf:./.docker/nginx/nginx.conf -wait tcp://laravel-db:3306 -timeout 20s ./.docker/entrypoint.sh
-        # environment: 
-        #     - DB_HOST=laravel-db
-        #     - DB_DATABASE=laravelapp
-        #     - DB_USERNAME=root
-        #     - DB_PASSWORD=123
-        #     - DB_PORT=3306
-        #     - NGINX_APP=laravel-app
-        #     - NGINX_PORT=9000
+        environment: 
+            - DB_HOST=laravel-db
+            - DB_DATABASE=laravelapp
+            - DB_USERNAME=root
+            - DB_PASSWORD=123
+            - DB_PORT=3306
+            - NGINX_APP=laravel-app
+            - NGINX_PORT=9000
         volumes:
             - .:/var/www
         depends_on: 
             - laravel-db
             - laravel-redis
-        links:
-            - laravel-db
         networks: 
             - laravel-network
     
