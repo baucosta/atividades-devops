@@ -14,6 +14,10 @@ steps:
     - id: "Copying .env"
       name: 'docker'
       args: ["exec", "-t", "laravel-app", "cp", ".env.example", ".env"]
+      
+    - id: "Clear migrations"
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "php", "/var/www/artisan", "config:clear"]
 
     - id: "Performing key:generate"
       name: 'docker'
