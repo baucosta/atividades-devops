@@ -7,30 +7,22 @@ steps:
       name: 'docker'
       args: ['exec','-u','root','-t','laravel-app','chown','-R','www-data:www-data','/var/www']
 
-    # - id: "Performing composer "
-    #   name: 'docker'
-    #   args: ["exec", "-t", "laravel-app", "composer", "install"]
+    - id: "Performing composer "
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "composer", "install"]
 
     - id: "Copying .env"
       name: 'docker'
       args: ["exec", "-t", "laravel-app", "cp", ".env.example", ".env"]
 
-    - id: "Performing ls"
+    - id: "Performing key:generate"
       name: 'docker'
-      args: ["exec", "-t", "laravel-app", "ls", "-la"]
+      args: ["exec", "-t", "laravel-app", "php", "/var/www/artisan", "key:generate"]
 
-    - id: "Performing ls in docker"
+    - id: "Performing migrations"
       name: 'docker'
-      args: ["exec", "-t", "laravel-app", "ls", "-la", ".docker"]
+      args: ["exec", "-t", "laravel-app", "php", "/var/www/artisan", "migrate"]
 
-    # - id: "Performing key:generate"
-    #   name: 'docker'
-    #   args: ["exec", "-t", "laravel-app", "php", "/var/www/artisan", "key:generate"]
-
-    # - id: "Performing migrations"
-    #   name: 'docker'
-    #   args: ["exec", "-t", "laravel-app", "php", "/var/www/artisan", "migrate"]
-
-    # - id: "Performing PHPUnit"
-    #   name: 'docker'
-    #   args: ["exec", "-t", "laravel-app", "php", "/var/www/vendor/bin/phpunit", "-c","/var/www/phpunit.xml"]
+    - id: "Performing PHPUnit"
+      name: 'docker'
+      args: ["exec", "-t", "laravel-app", "php", "/var/www/vendor/bin/phpunit", "-c","/var/www/phpunit.xml"]
