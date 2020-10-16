@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"strconv"
+
+	"github.com/logrusorgru/aurora"
 )
 
 func soma(val1, val2 int) int {
@@ -14,6 +16,6 @@ func main() {
 
 	result := "Resultado de 5 + 5 = " + conv
 
-	// fmt.Println(aurora.Magenta(result))
-	fmt.Println(result)
+	fmt.Println(aurora.Magenta(result))
+	// fmt.Println(result)
 }
