@@ -3,3 +3,7 @@ steps:
     - id: "Performing Go Test"
       name: 'golang'
       args: ["go", "test", "./4_Desafio_de_CI/src/"]
+
+    - id: "Performing Go Run"
+      name: 'golang'
+      args: ["go", "run", "./4_Desafio_de_CI/src/main.go"]
