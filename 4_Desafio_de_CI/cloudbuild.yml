@@ -1,9 +1,11 @@
 steps:
-    #   name: 'gcr.io/$PROJECT_ID/image_name'
     - id: "Performing Go Test"
       name: 'golang'
       args: ["go", "test", "./4_Desafio_de_CI/src/"]
 
-    - id: "Performing Go Run"
-      name: 'golang'
-      args: ["go", "run", "./4_Desafio_de_CI/src/main.go"]
+    - id: "Creating golang app image"
+      name: 'docker'
+      args: ["build", "-t", "gcr.io/$PROJECT_ID/image_name:latest", "./4_Desafio_de_CI/"]
+
+images:
+    - "gcr.io/$PROJECT_ID/image_name:latest"
