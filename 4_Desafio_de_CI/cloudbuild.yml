@@ -1,5 +1,5 @@
 steps:
     #   name: 'gcr.io/$PROJECT_ID/image_name'
     - id: "Performing Go Test"
-      name: 'go'
+      name: 'gcr.io/cloud-builders/go'
       args: ["go", "test"]
