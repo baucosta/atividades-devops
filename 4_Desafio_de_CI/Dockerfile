@@ -2,7 +2,7 @@ FROM golang:1.15.2-alpine as builder
 
 WORKDIR /go/src/desafio-ci
 
-COPY . .
+COPY ./src/ .
 
 RUN go get -d -v
 
