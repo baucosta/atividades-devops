@@ -12,7 +12,7 @@ func soma(val1, val2 int) int {
 func main() {
 	conv := strconv.Itoa(soma(5, 5))
 
-	result := "Resultado de 5 + 5 = " + conv
+	result := "Resultado de 5 + 6 = " + conv
 
 	fmt.Println(result)
 }

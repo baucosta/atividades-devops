@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: nginx-deployment
+    labels:
+        app: nginx-deployment-utilizando-k8s
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: nginx-utilizando-k8s
+    template:
+        metadata:
+            labels:
+                app: nginx-utilizando-k8s
+        spec:
+            containers:
+                - name: nginx
+                  image: nginx:1.19.3-alpine
+                  ports:
+                    - containerPort: 80
+
+
