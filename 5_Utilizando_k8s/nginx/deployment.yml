@@ -19,5 +19,19 @@ spec:
                   image: nginx:1.19.3-alpine
                   ports:
                     - containerPort: 80
+                  
+                  volumeMounts:
+                    - mountPath: /usr/share/nginx/html
+                      name: nginx-conf-volume
+                      readOnly: false
+
+
+            volumes:
+                - name: nginx-conf-volume
+                  configMap:
+                    name: nginx-configmap
+                    items:
+                        - key: nginx-conf-key
+                          path: index.html
 
 
