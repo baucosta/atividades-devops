@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: mysql-service
+    labels:
+        app: mysql-service-utilizando-k8s
+spec:
+    ports:
+        - port: 3306
+    selector:
+        app: mysql-server
+        tier: database
+    clusterIP: None
