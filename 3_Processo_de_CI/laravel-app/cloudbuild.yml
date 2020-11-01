@@ -7,7 +7,7 @@ steps:
       name: 'docker'
       args: ['exec','-u','root','-t','laravel-app','chown','-R','www-data:www-data','/var/www']
 
-    - id: "Performing composer "
+    - id: "Performing composer"
       name: 'docker'
       args: ["exec", "-t", "laravel-app", "composer", "install"]
 
