@@ -1,7 +1,25 @@
 steps:
+    - id: "Building go modules"
+      name: 'golang'
+      env:
+        - GOPATH=/gopath
+        - GO111MODULE=on
+        - GOPROXY=https://proxy.golang.org
+      args: ["go", "build", "./5_Utilizando_k8s/desafio-go/"]
+      artifacts:
+        objects:
+          location: '[STORAGE_LOCATION]'
+          paths: ['[ARTIFACT_PATH]']
+
     - id: "Performing Go Test"
       name: 'golang'
-      env: ['GOPATH=/gopath']
+      env:
+        - GOPATH=/gopath
+        - GO111MODULE=on
+        - GOPROXY=https://proxy.golang.org
+      # volumes:
+      #   - name: go-modules
+      #     path: /gopath
       args: ["go", "test", "./5_Utilizando_k8s/desafio-go/"]
 
     - id: "Performing go application"
