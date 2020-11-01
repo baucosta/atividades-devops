@@ -1,0 +1,8 @@
+steps:
+    - id: "Performing Go Test"
+      name: 'golang'
+      args: ["go", "test", "./5_Utilizando_k8s/desafio-go/"]
+
+    - id: "Performing application"
+      name: 'docker'
+      args: ["run", "16121988/utilizando-k8s"]
