@@ -2,6 +2,9 @@ steps:
     - id: "Performing Go Test"
       name: 'golang'
       env: ['GOPATH=/gopath']
+      volumes:
+        - name: 'go'
+          path: '/gopath'
       args: ["go", "test", "./5_Utilizando_k8s/desafio-go/"]
 
     - id: "Performing go application"
