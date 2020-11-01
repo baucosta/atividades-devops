@@ -5,12 +5,12 @@ steps:
         - GOPATH=/gopath
         - GO111MODULE=on
         - GOPROXY=https://proxy.golang.org
-      dir: desafio-go
+      dir: atividades-devops
       args: 
         - go
         - build
         - ./5_Utilizando_k8s/desafio-go/
-        - desafio-go
+        - atividades-devops
       volumes:
         - name: go-modules
           path: /gopath
@@ -21,7 +21,7 @@ steps:
         - GOPATH=/gopath
         - GO111MODULE=on
         - GOPROXY=https://proxy.golang.org
-      dir: desafio-go
+      dir: atividades-devops
       volumes:
         - name: go-modules
           path: /gopath
@@ -29,7 +29,7 @@ steps:
         - go
         - test
         - ./5_Utilizando_k8s/desafio-go/
-        - desafio-go
+        - atividades-devops
 
     - id: "Performing go application"
       name: 'docker'
