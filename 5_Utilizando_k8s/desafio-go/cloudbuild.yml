@@ -3,7 +3,6 @@ steps:
       name: 'golang'
       env:
         - GOPATH=/gopath
-        - GO111MODULE=on
         - GOPROXY=https://proxy.golang.org
       args: ["go", "build", "./5_Utilizando_k8s/desafio-go/"]
       volumes:
@@ -14,7 +13,6 @@ steps:
       name: 'golang'
       env:
         - GOPATH=/gopath
-        - GO111MODULE=on
         - GOPROXY=https://proxy.golang.org
       volumes:
         - name: go-modules
