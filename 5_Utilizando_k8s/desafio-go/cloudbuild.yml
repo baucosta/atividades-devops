@@ -1,10 +1,13 @@
 steps:
     - id: "Performing Go Test"
       name: 'golang'
-      env: ['GOPATH=/gopath']
+      env:
+        - GOPATH=/gopath
+        - GO111MODULE=on
+        - GOPROXY=https://proxy.golang.org
       volumes:
-        - name: 'go'
-          path: '/gopath'
+        - name: go-modules
+          path: /gopath
       args: ["go", "test", "./5_Utilizando_k8s/desafio-go/"]
 
     - id: "Performing go application"
