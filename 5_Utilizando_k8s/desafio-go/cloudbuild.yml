@@ -1,8 +1,32 @@
 steps:
+    - id: "Building go modules"
+      name: 'golang'
+      env:
+        - GOPATH=/gopath
+        - GO111MODULE=on
+        - GOPROXY=https://proxy.golang.org
+      dir: ./5_Utilizando_k8s/desafio-go/
+      args: 
+        - go
+        - build
+      volumes:
+        - name: go-modules
+          path: /gopath
+
     - id: "Performing Go Test"
       name: 'golang'
-      args: ["go", "test", "./5_Utilizando_k8s/desafio-go/"]
+      env:
+        - GOPATH=/gopath
+        - GO111MODULE=on
+        - GOPROXY=https://proxy.golang.org
+      volumes:
+        - name: go-modules
+          path: /gopath
+      args:
+        - go
+        - test
+        - ./5_Utilizando_k8s/desafio-go/
 
-    - id: "Performing application"
+    - id: "Performing go application"
       name: 'docker'
       args: ["run", "16121988/utilizando-k8s"]
