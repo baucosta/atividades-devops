@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: desafio-go-deployment
+    labels:
+        app: desafio-go-deployment-utilizando-k8s
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: desafio-go-utilizando-k8s
+    template:
+        metadata:
+            labels:
+                app: desafio-go-utilizando-k8s
+        spec:
+            containers:
+                - name: desafio-go
+                  image: 16121988/utilizando-k8s
+                  ports:
+                    - containerPort: 8000
