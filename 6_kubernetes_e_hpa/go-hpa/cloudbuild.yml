@@ -1,0 +1,32 @@
+steps:
+    - id: "Building go modules"
+      name: 'golang'
+      env:
+        - GOPATH=/gopath
+        - GO111MODULE=on
+        - GOPROXY=https://proxy.golang.org
+      dir: ./6_kubernetes_e_hpa/go-hpa/
+      args: 
+        - go
+        - build
+      volumes:
+        - name: go-modules
+          path: /gopath
+
+    - id: "Performing Go Test"
+      name: 'golang'
+      env:
+        - GOPATH=/gopath
+        - GO111MODULE=on
+        - GOPROXY=https://proxy.golang.org
+      dir: ./6_kubernetes_e_hpa/go-hpa/
+      args:
+        - go
+        - test
+      volumes:
+        - name: go-modules
+          path: /gopath
+
+    - id: "Performing go application"
+      name: 'docker'
+      args: ["pull", "16121988/go-hpa"]
