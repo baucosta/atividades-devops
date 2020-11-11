@@ -16,7 +16,7 @@ spec:
         spec:
             containers:
                 - name: go-hpa
-                  image: 16121988/go-hpa
+                  image: go-image-deploy
                   ports:
                     - containerPort: 8000
                   resources:
