@@ -51,4 +51,4 @@ steps:
         - ./7_deploy_continuo/k8s/deployment-new.yml
       env:
         - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
-        - 'CLOUD_CONTAINER_CLUSTER=atividade-codeeducation'
+        - 'CLOUDSDK_CONTAINER_CLUSTER=atividade-codeeducation'
