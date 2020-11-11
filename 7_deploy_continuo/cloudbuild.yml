@@ -5,7 +5,7 @@ steps:
         - GOPATH=/gopath
         - GO111MODULE=on
         - GOPROXY=https://proxy.golang.org
-      dir: ./6_kubernetes_e_hpa/go-hpa/
+      dir: ./7_deploy_continuo/
       args: 
         - go
         - build
@@ -19,7 +19,7 @@ steps:
         - GOPATH=/gopath
         - GO111MODULE=on
         - GOPROXY=https://proxy.golang.org
-      dir: ./6_kubernetes_e_hpa/go-hpa/
+      dir: ./7_deploy_continuo/
       args:
         - go
         - test

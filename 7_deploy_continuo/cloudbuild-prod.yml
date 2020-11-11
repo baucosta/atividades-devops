@@ -35,15 +35,15 @@ steps:
       name: 'docker'
       args: ["push", "gcr.io/$PROJECT_ID/go-deploy-continuo:$SHORT_SHA"]
 
-    # - id: "Changin image in kubernet deployment"
-    #   name: 'gcloud'
-    #   # name: gcr.io/cloud-builders/gcloud
-    #   entrypoint: '/bin/sh'
-    #   args:
-    #     - '-c'
-    #     - |
-    #       sed 's#img-app-deployment#gcr.io/$PROJECT_ID/go-deploy-continuo:$SHORT_SHA#g' k8s/deployment.yml > k8s/deployment-new.yml;
-    #       cat k8s/deployment-new.yml;
+    - id: "Changing image in kubernetes deployment"
+      name: 'gcloud'
+      # name: gcr.io/cloud-builders/gcloud
+      entrypoint: '/bin/sh'
+      args:
+        - '-c'
+        - |
+          sed 's#go-image-deploy#gcr.io/$PROJECT_ID/go-deploy-continuo:$SHORT_SHA#g' ./7_deploy_continuo/k8s/deployment.yml > ./7_deploy_continuo/k8s/deployment-new.yml;
+          cat ./7_deploy_continuo/k8s/deployment-new.yml;
     
     # - id: "Deploying kubernetes"
     #   name: 'kubectl'
@@ -51,7 +51,7 @@ steps:
     #   args:
     #     - 'apply'
     #     - '-f'
-    #     - k8s/deployment-new.yml
+    #     - ./7_deploy_continuo/k8s/deployment-new.yml
     #   env:
     #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
     #     - 'CLOUD_CONTAINER_CLUSTER=name_my_cluster'
