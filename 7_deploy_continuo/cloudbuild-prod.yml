@@ -36,8 +36,7 @@ steps:
       args: ["push", "gcr.io/$PROJECT_ID/go-deploy-continuo:$SHORT_SHA"]
 
     - id: "Changing image in kubernetes deployment"
-      name: 'gcloud'
-      # name: gcr.io/cloud-builders/gcloud
+      name: gcr.io/cloud-builders/gcloud
       entrypoint: '/bin/sh'
       args:
         - '-c'
@@ -46,8 +45,7 @@ steps:
           cat ./7_deploy_continuo/k8s/deployment-new.yml;
     
     # - id: "Deploying kubernetes"
-    #   name: 'kubectl'
-    #   # name: gcr.io/cloud-builders/kubectl
+    #   name: gcr.io/cloud-builders/kubectl
     #   args:
     #     - 'apply'
     #     - '-f'
