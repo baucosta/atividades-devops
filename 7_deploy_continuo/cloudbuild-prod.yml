@@ -42,14 +42,13 @@ steps:
         - '-c'
         - |
           sed 's#go-image-deploy#gcr.io/$PROJECT_ID/go-deploy-continuo:$SHORT_SHA#g' ./7_deploy_continuo/k8s/deployment.yml > ./7_deploy_continuo/k8s/deployment-new.yml;
-          cat ./7_deploy_continuo/k8s/deployment-new.yml;
     
-    # - id: "Deploying kubernetes"
-    #   name: gcr.io/cloud-builders/kubectl
-    #   args:
-    #     - 'apply'
-    #     - '-f'
-    #     - ./7_deploy_continuo/k8s/deployment-new.yml
-    #   env:
-    #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-    #     - 'CLOUD_CONTAINER_CLUSTER=name_my_cluster'
+    - id: "Deploying kubernetes"
+      name: gcr.io/cloud-builders/kubectl
+      args:
+        - 'apply'
+        - '-f'
+        - ./7_deploy_continuo/k8s/deployment-new.yml
+      env:
+        - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+        - 'CLOUD_CONTAINER_CLUSTER=atividade-codeeducation	'
