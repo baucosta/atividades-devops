@@ -1,0 +1,57 @@
+steps:
+    - id: "Building go modules"
+      name: 'golang'
+      env:
+        - GOPATH=/gopath
+        - GO111MODULE=on
+        - GOPROXY=https://proxy.golang.org
+      dir: ./7_deploy_continuo/
+      args: 
+        - go
+        - build
+      volumes:
+        - name: go-modules
+          path: /gopath
+
+    - id: "Performing Go Test"
+      name: 'golang'
+      env:
+        - GOPATH=/gopath
+        - GO111MODULE=on
+        - GOPROXY=https://proxy.golang.org
+      dir: ./7_deploy_continuo/
+      args:
+        - go
+        - test
+      volumes:
+        - name: go-modules
+          path: /gopath
+
+    - id: "Building go docker image"
+      name: 'docker'
+      args: ["build", "-t", "gcr.io/$PROJECT_ID/go-deploy-continuo:$SHORT_SHA", "./7_deploy_continuo/"]
+    
+    - id: "Pushing go docker image"
+      name: 'docker'
+      args: ["push", "gcr.io/$PROJECT_ID/go-deploy-continuo:$SHORT_SHA"]
+
+    # - id: "Changin image in kubernet deployment"
+    #   name: 'gcloud'
+    #   # name: gcr.io/cloud-builders/gcloud
+    #   entrypoint: '/bin/sh'
+    #   args:
+    #     - '-c'
+    #     - |
+    #       sed 's#img-app-deployment#gcr.io/$PROJECT_ID/go-deploy-continuo:$SHORT_SHA#g' k8s/deployment.yml > k8s/deployment-new.yml;
+    #       cat k8s/deployment-new.yml;
+    
+    # - id: "Deploying kubernetes"
+    #   name: 'kubectl'
+    #   # name: gcr.io/cloud-builders/kubectl
+    #   args:
+    #     - 'apply'
+    #     - '-f'
+    #     - k8s/deployment-new.yml
+    #   env:
+    #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+    #     - 'CLOUD_CONTAINER_CLUSTER=name_my_cluster'
